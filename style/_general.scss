@@ -1,0 +1,137 @@
+/* Création d'une fonction qui cummule 2 valeurs en pixel*/
+@function add($a,$b) {
+    @return $a+$b;
+}
+
+body {
+    background-color: silver;
+}
+// CREATION D'UN EXTEND POUR LA TAILLE ET LA COULEUR DE TEXTE
+.couleurTaille{
+    color: $couleur_blanche;
+    font-size: 1.1em;
+}
+.container {
+    background-color: $couleur_blanche;
+    width: 80%;
+    padding: 1em;
+    margin: 0 auto;
+    display: grid;
+    grid-template-rows: repeat(12, 1fr);
+}
+header {
+    // INTEGRATION DE LA MIXIN GRID
+    @include grid();
+    grid-column: 1 / -1;
+    grid-row: 1 / 3;
+
+    // IMBRICATION
+    .logo {
+          // INTEGRATION DE LA MIXIN FLEX
+        @include flexAll();
+        background-color: $couleur_bleu;
+        color: $couleur_blanche;
+        grid-column: 1 / 3;
+    }
+    ul.nav {
+          // INTEGRATION DE LA MIXIN FLEX
+        @include flex;
+        list-style-type: none;
+        background-color: $couleur_jaune;
+        font-weight: bold;
+        font-size: 1.1em;
+        grid-column: 3 / -1;
+        margin: 0;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+}
+main {
+    // INTEGRATION DE LA MIXIN FLEX
+    @include grid();
+    // RAPPEL DE L'EXTEND COULEUR BLANCHE
+    @extend .couleurTaille;
+    background-color: $couleur_rouge;
+    grid-column: 1 / -1;
+    grid-row: 3 / 12;
+    aside {
+        background-color: $couleur_bordeaux;
+        grid-column: 1 / 4;
+        // RAPPEL D'UNE FONCTION ADD QUI ADDITIONE 2 VALEURS
+        padding: add(8px,8px);
+         ul {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            @include flex();
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        
+    }
+}
+
+section {
+    @include grid();
+    grid-column: 4 / -1;
+    .article1 {
+        grid-column: 1 / 5;
+        background-color:springgreen;
+        color: $couleur_noire;
+        font-size: 1.1em;
+        @include flexAll();
+    }
+    .article2 {
+        grid-column: 5 / 9;
+        background-color:chocolate;
+        @include flexAll();
+        @extend .couleurTaille;
+    }
+    #form {
+        @include carreCercle('.form1','.form2','.form3','.form4');
+    }
+    .form {
+        width: 120px;
+        height: 120px;
+        border: 1px solid black;
+        margin-bottom: 5px;
+        @include flexAll();
+    }
+    .form1 {
+        background-color: $couleur_jaune;
+        color: black;      
+    }
+    .form2{
+        background-color: $couleur_bleu;  
+    }
+    .form3{
+        background-color: $couleur_bordeaux; 
+    }
+    .form4 {
+        background-color: $couleur_blanche; 
+        color: black;            
+    }
+    .article3 {
+        grid-column: 9 / -1;
+        background-color:cadetblue;
+        @include flexAll();
+        @extend .couleurTaille;
+    }
+  
+}
+
+article {
+    // RAPPEL D'UNE FONCTION ADD QUI ADDITIONE 2 VALEURS
+    padding: add(8px,8px);
+}
+
+footer {
+    // INTEGRATION DE LA MIXIN FLEX
+    @include flex();
+    @extend .couleurTaille;
+    background-color: $couleur_noire;
+    color: $couleur_blanche;
+}

@@ -1,0 +1,30 @@
+// Mixin simple
+@mixin grid() {
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
+}
+
+// Mixin simle
+@mixin flex() {
+    display: flex;
+    justify-content: center;
+}
+// Mixin simle
+@mixin flexAll() {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Mixin et  création d'une boucle */
+@mixin carreCercle($evolution...) {
+    @for $i from 0 to length($evolution) {
+        #{nth($evolution,$i+1)}{
+            border-radius: 30px + $i * 10;
+            @if $i>1 {
+                @warn "Limite d'enfants dépassé";
+            }
+        }
+    }
+}
+
